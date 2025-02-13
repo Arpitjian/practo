@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Doctor</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      background: #fff;
+      padding: 20px;
+      margin: auto;
+      border-radius: 8px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    /* Form Styles */
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .container {
+        width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Add Doctor</h2>
+  <form action="/saveDoctor" method="post">
+    <label for="name">Doctor Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required>
+
+    <label for="about">Description:</label>
+    <textarea id="about" name="about"></textarea>
+
+    <!-- Speciality Dropdown -->
+    <label for="speciality">Speciality:</label>
+    <select id="speciality" name="speciality" required>
+      <option value="">Select Speciality</option>
+      <th:block th:each="speciality : ${specialites}">
+        <option th:value="${speciality.id}" th:text="${speciality.name}"></option>
+      </th:block>
+    </select>
+
+    <!-- State Dropdown -->
+    <label for="state">State:</label>
+    <select id="state" name="stateId" required>
+      <option value="">Select State</option>
+      <th:block th:each="state : ${states}">
+        <option th:value="${state.id}" th:text="${state.name}"></option>
+      </th:block>
+    </select>
+
+    <label for="city">City:</label>
+    <select id="city" name="cityId" required>
+      <option value="">Select City</option>
+      <th:block th:each="city : ${Cities}">
+        <option th:value="${city.id}" th:text="${city.name}"></option>
+      </th:block>
+    </select>
+    <label for="qualification">Doctor Name:</label>
+    <input type="text" id="qualification" name="qualification" required>
+
+
+    <button type="submit">Save Doctor</button>
+  </form>
+</div>
+
+<script>
+
+</script>
+
+</body>
+</html>

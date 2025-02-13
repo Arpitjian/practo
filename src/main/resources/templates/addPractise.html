@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Hospital/Practice</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    label {
+        font-weight: bold;
+    }
+    input, select, textarea {
+        width: 100%;
+        padding: 8px;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Add Hospital/Practice</h2>
+  <form action="/save-hospital" method="post">
+    <label for="name">Hospital/Practice Name:</label>
+    <input type="text" id="name" name="name" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea>
+
+    <!-- State Dropdown -->
+    <label for="state">State:</label>
+    <select id="state" name="stateId" required>
+      <option value="">Select State</option>
+      <th:block th:each="state : ${states}">
+        <option th:value="${state.id}" th:text="${state.name}"></option>
+      </th:block>
+    </select>
+
+    <!-- City Dropdown -->
+    <label for="city">City:</label>
+    <select id="city" name="cityId" required>
+      <option value="">Select City</option>
+    </select>
+
+    <button type="submit">Save Hospital</button>
+  </form>
+</div>
+
+<script>
+  $(document).ready(function() {
+      $("#state").change(function() {
+          var stateId = $(this).val();
+          $("#city").empty().append('<option value="">Select City</option>');
+
+          if (stateId) {
+              $.ajax({
+                  url: "/get-cities/" + stateId,
+                  type: "GET",
+                  success: function(data) {
+                      $.each(data, function(index, city) {
+                          $("#city").append('<option value="' + city.id + '">' + city.name + '</option>');
+                      });
+                  }
+              });
+          }
+      });
+  });
+</script>
+
+</body>
+</html>
