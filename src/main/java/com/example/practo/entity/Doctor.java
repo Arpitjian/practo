@@ -15,6 +15,8 @@ public class Doctor {
 
     private String about;
 
+    private  String qualification;
+
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;
