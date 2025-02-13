@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin-top: 50px;
+    }
+    .login-container {
+        width: 300px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+    }
+    .input-field {
+        width: 100%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .login-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .login-button:hover {
+        background-color: #0056b3;
+    }
+    .signup-message {
+        margin-top: 15px;
+    }
+    .signup-message a {
+        color: #007BFF;
+        text-decoration: none;
+    }
+    .signup-message a:hover {
+        text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div th:insert="fragments/header :: body"></div>
+<h1>Login</h1>
+<div class="login-container">
+  <form th:action="@{/loginUser}" method="get">
+    <input type="email" name="email" class="input-field" placeholder="Email" required>
+    <input type="password" name="password" class="input-field" placeholder="Password" required>
+    <select name="role" class="input-field" required>
+      <option value="">Select Role</option>
+      <option value="admin">Admin</option>
+      <option value="user">User</option>
+    </select>
+    <button type="submit" class="login-button">Login</button>
+  </form>
+  <p class="signup-message">Not a user? <a th:href="@{/signup}">Sign up here</a></p>
+</div>
+</body>
+</html>
