@@ -1,181 +1,66 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--  <meta charset="UTF-8">-->
-<!--  <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--  <title>Find Best Doctors</title>-->
-<!--  <style>-->
-<!--    body {-->
-<!--        font-family: Arial, sans-serif;-->
-<!--        text-align: center;-->
-<!--        margin: 0;-->
-<!--        padding: 0;-->
-<!--        background-color: #f4f4f4;-->
-<!--    }-->
-<!--    .container {-->
-<!--        max-width: 600px;-->
-<!--        margin: 50px auto;-->
-<!--        padding: 20px;-->
-<!--        background: white;-->
-<!--        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);-->
-<!--        border-radius: 10px;-->
-<!--    }-->
-<!--    h1 {-->
-<!--        color: #007BFF;-->
-<!--    }-->
-<!--    p {-->
-<!--        font-size: 16px;-->
-<!--        color: #333;-->
-<!--    }-->
-<!--    .search-container {-->
-<!--        margin-top: 20px;-->
-<!--    }-->
-<!--    select, button {-->
-<!--        padding: 10px;-->
-<!--        margin: 5px;-->
-<!--        width: 80%;-->
-<!--        border: 1px solid #ccc;-->
-<!--        border-radius: 5px;-->
-<!--        font-size: 16px;-->
-<!--    }-->
-<!--    button {-->
-<!--        background-color: #007BFF;-->
-<!--        color: white;-->
-<!--        cursor: pointer;-->
-<!--        width: 85%;-->
-<!--    }-->
-<!--    button:hover {-->
-<!--        background-color: #0056b3;-->
-<!--    }-->
-<!--  </style>-->
-<!--</head>-->
-<!--<body>-->
-
-<!--<div class="container">-->
-<!--  <h1>Find Best Doctors</h1>-->
-<!--  <p>Your health, our priority. Access top-quality medical care, book appointments, and connect with the best doctors.</p>-->
-
-<!--  <div class="search-container">-->
-<!--    <select id="speciality">-->
-<!--      <option value="" disabled selected>Select Speciality</option>-->
-<!--      <option value="cardiologist">Cardiologist</option>-->
-<!--      <option value="dermatologist">Dermatologist</option>-->
-<!--      <option value="neurologist">Neurologist</option>-->
-<!--      <option value="orthopedic">Orthopedic</option>-->
-<!--    </select>-->
-
-<!--    <select id="location">-->
-<!--      <option value="" disabled selected>Select Location</option>-->
-<!--      <option value="newyork">New York</option>-->
-<!--      <option value="losangeles">Los Angeles</option>-->
-<!--      <option value="chicago">Chicago</option>-->
-<!--      <option value="houston">Houston</option>-->
-<!--    </select>-->
-
-<!--    <button onclick="searchDoctors()">Find Doctors</button>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<script>-->
-<!--  function searchDoctors() {-->
-<!--      let speciality = document.getElementById("speciality").value;-->
-<!--      let location = document.getElementById("location").value;-->
-
-<!--      if (speciality && location) {-->
-<!--          alert("Searching for " + speciality + " doctors in " + location);-->
-<!--          // Redirect to results page (modify this based on your actual application)-->
-<!--          window.location.href = "/search?speciality=" + speciality + "&location=" + location;-->
-<!--      } else {-->
-<!--          alert("Please select both speciality and location.");-->
-<!--      }-->
-<!--  }-->
-<!--</script>-->
-
-<!--</body>-->
-<!--</html>-->
-
-
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Find Best Doctors</title>
+  <title>Find Doctors</title>
   <style>
     body {
         font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
         text-align: center;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f4;
+        padding: 50px;
     }
     .container {
-        max-width: 500px;
-        margin: 50px auto;
-        padding: 20px;
+        max-width: 600px;
+        margin: auto;
         background: white;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 30px;
         border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
     h1 {
-        color: #007BFF;
+        color: #2c3e50;
     }
     p {
-        font-size: 16px;
-        color: #333;
+        color: #555;
+        font-size: 18px;
     }
     .search-box {
         margin-top: 20px;
     }
-    input {
+    input[type="text"] {
         width: 80%;
         padding: 10px;
-        font-size: 16px;
         border: 1px solid #ccc;
         border-radius: 5px;
-        outline: none;
+        font-size: 16px;
     }
     button {
         padding: 10px 15px;
-        font-size: 16px;
         border: none;
-        background-color: #007BFF;
+        background-color: #3498db;
         color: white;
         border-radius: 5px;
+        font-size: 16px;
         cursor: pointer;
-        margin-top: 10px;
     }
     button:hover {
-        background-color: #0056b3;
+        background-color: #2980b9;
     }
   </style>
 </head>
 <body>
 
 <div class="container">
-  <h1>Find Best Doctors</h1>
-  <p>Your health, our priority. Access top-quality medical care, book appointments, and connect with the best doctors.</p>
+  <h1>Find the Best Doctors</h1>
+  <p>Consult them anytime, anywhere – on the go!</p>
 
   <div class="search-box">
-    <input type="text" id="searchQuery" placeholder="Search by speciality or location">
-    <button onclick="searchDoctors()">Search</button>
+    <form th:action="@{/search}" method="get">
+      <input type="text" name="keyword" placeholder="Search for doctors, hospitals, or specialties">
+      <button type="submit">Search</button>
+    </form>
   </div>
 </div>
 
-<script>
-  function searchDoctors() {
-      let query = document.getElementById("searchQuery").value.trim();
-
-      if (query) {
-          alert("Searching for doctors related to: " + query);
-          // Redirect to results page (Modify for actual Elasticsearch integration)
-          window.location.href = "/search?query=" + encodeURIComponent(query);
-      } else {
-          alert("Please enter a search term.");
-      }
-  }
-</script>
-
 </body>
 </html>
-

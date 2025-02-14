@@ -1,22 +1,22 @@
 package com.example.practo.controller;
 
-import com.example.practo.entity.City;
-import com.example.practo.entity.Doctor;
-import com.example.practo.entity.Speciality;
-import com.example.practo.entity.State;
-import com.example.practo.repository.CityRepo;
-import com.example.practo.repository.DoctorRepository;
-import com.example.practo.repository.SpecialityRepo;
-import com.example.practo.repository.StateRepo;
+import com.example.practo.ElasticRepository.DoctorSearchRepository;
+import com.example.practo.ElasticRepository.HospitalSearchRepository;
+import com.example.practo.entity.*;
+import com.example.practo.indexes.DoctorIndex;
+import com.example.practo.indexes.HospitalIndex;
+import com.example.practo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.ui.Model;
 
 import javax.validation.constraints.Null;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class DoctorController {
@@ -33,50 +33,52 @@ public class DoctorController {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @GetMapping("/addDoctor")
-    public String addDoctor(Model model){
+    @Autowired
+    private DoctorSearchRepository doctorSearchRepository;
 
+    @Autowired
+    private HospitalSearchRepository hospitalSearchRepository;
 
-        List<Speciality> specialityList = specialityRepo.findAll();
-        List<State> stateList = stateRepo.findAll();
-        List<City> cityList = cityRepo.findAll();
-        model.addAttribute("specialites",specialityList);
-        model.addAttribute("Cities",cityList);
-        model.addAttribute("states",stateList);
+    @Autowired
+    private HospitalRepository hospitalRepository;
 
+        @GetMapping("/doctor/doctorProfile/{id}")
+        public String viewDoctorProfile(@PathVariable String id, Model model) {
+        Optional<DoctorIndex> doctor = doctorSearchRepository.findById(id);
 
-        System.out.println("Specialities: " + specialityList);
-        System.out.println("States: " + stateList);
-        System.out.println("Cities: " + cityList);
-
-        System.out.println("inside the adddocto fundtion");
-        return  "addDoctor";
+        if (doctor.isPresent()) {
+            model.addAttribute("doctor", doctor.get());
+            return "DoctorProfile"; // Render the Thymeleaf template
+        } else {
+            return "error"; // Show an error page if doctor is not found
+        }
     }
 
+    @GetMapping("/bookAppointMent/{id}")
+    public String bookAppointment(@PathVariable String id, Model model) {
+        return "bookAppointment";
+    }
 
-    @PostMapping("/saveDoctor")
-    public String saveDoctor(@RequestParam String name,
-                             @RequestParam Integer age,
-                             @RequestParam String about,
-                             @RequestParam Long speciality,
-                             @RequestParam Long cityId,
-                             @RequestParam Long stateId,
-                             @RequestParam String qualification) {
-        Doctor doctor = new Doctor();
-        doctor.setName(name);
-        doctor.setAge(age);
-        doctor.setAbout(about);
-        doctor.setSpeciality(specialityRepo.findById(speciality).orElse(null));
-        doctor.setCity(cityRepo.findById(cityId).orElse(null));
-        doctor.setState(stateRepo.findById(stateId).orElse(null));
-        doctorRepository.save(doctor);
-        return  "success";
+    @GetMapping("/saveAppointment")
+    public String saveAppointment(){
+        return "success";
+    }
 
+    @GetMapping("/hospital/hospitalProfile/{id}")
+    public String viewPractiseProfile(@PathVariable String id, Model model) {
+        Optional<HospitalIndex> hospital = hospitalSearchRepository.findById(id);
 
-
-
-
-
+        if (hospital.isPresent()) {
+            model.addAttribute("hospital", hospital.get());
+            return "practiseProfile"; // Render the Thymeleaf template
+        } else {
+            return "error"; // Show an error page if doctor is not found
+        }
     }
 }
+
+
+
+
+
 

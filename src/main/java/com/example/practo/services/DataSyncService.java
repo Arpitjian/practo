@@ -4,7 +4,10 @@ import com.example.practo.ElasticRepository.CitySearchRepository;
 import com.example.practo.ElasticRepository.DoctorSearchRepository;
 import com.example.practo.ElasticRepository.HospitalSearchRepository;
 import com.example.practo.ElasticRepository.SpecialitySearchRepository;
+import com.example.practo.entity.City;
 import com.example.practo.entity.Doctor;
+import com.example.practo.entity.Hospital;
+import com.example.practo.indexes.CityIndex;
 import com.example.practo.indexes.DoctorIndex;
 import com.example.practo.indexes.HospitalIndex;
 import com.example.practo.repository.CityRepo;
@@ -79,6 +82,32 @@ public class DataSyncService {
                 System.out.println(" Synced Hospital: " + hospital.getName());
             } catch (Exception e) {
                 System.err.println( "Error syncing hospital: " + hospital.getName() + " -> " + e.getMessage());
+            }
+        });
+    }
+
+    @PostConstruct
+    public void syncCitiesToElastic() {
+        List<City> cities = cityRepository.findAll();
+
+        if (cities.isEmpty()) {
+            System.out.println(" No cities found in MySQL to sync.");
+            return;
+        }
+
+        cities.forEach(city -> {
+            try {
+                System.out.println("Syncing City -> Name: " + city.getName());
+
+                CityIndex cityIndex = new CityIndex(
+                        city.getId().toString(),
+                        city.getName()
+                );
+
+                citySearchRepository.save(cityIndex);
+                System.out.println(" Synced City: " + city.getName());
+            } catch (Exception e) {
+                System.err.println("Error syncing city: " + city.getName() + " -> " + e.getMessage());
             }
         });
     }
