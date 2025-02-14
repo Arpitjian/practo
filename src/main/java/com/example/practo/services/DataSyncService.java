@@ -56,9 +56,9 @@ public class DataSyncService {
                         doctor.getCity().getName()
                 );
                 doctorSearchRepository.save(doctorIndex);
-                System.out.println("✅ Synced: " + doctor.getName());
+                System.out.println(" Synced: " + doctor.getName());
             } catch (Exception e) {
-                System.err.println("❌ Error syncing doctor: " + doctor.getName() + " -> " + e.getMessage());
+                System.err.println(" Error syncing doctor: " + doctor.getName() + " -> " + e.getMessage());
             }
         });
     }
@@ -76,11 +76,12 @@ public class DataSyncService {
                 );
 
                 hospitalSearchRepository.save(hospitalIndex);
-                System.out.println("✅ Synced Hospital: " + hospital.getName());
+                System.out.println(" Synced Hospital: " + hospital.getName());
             } catch (Exception e) {
-                System.err.println("❌ Error syncing hospital: " + hospital.getName() + " -> " + e.getMessage());
+                System.err.println( "Error syncing hospital: " + hospital.getName() + " -> " + e.getMessage());
             }
         });
     }
+
 
 }
