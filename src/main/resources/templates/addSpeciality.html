@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Doctor Speciality</title>
+  <style>
+    .form-container {
+        width: 40%;
+        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .form-container input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .form-container button {
+        padding: 10px 20px;
+        color: white;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .form-container button:hover {
+        background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="form-container">
+  <h2>Add Doctor Speciality</h2>
+  <form action="/saveSpeciality" method="post">
+    <label for="specialityName">Speciality Name:</label>
+    <input type="text" id="specialityName" name="name" required>
+    <br>
+    <button type="submit">Save Speciality</button>
+  </form>
+</div>
+
+</body>
+</html>

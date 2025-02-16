@@ -40,6 +40,19 @@ public class Hospital {
         return name;
     }
 
+    public Hospital() {
+
+    }
+
+    public Hospital(String name, String contact, List<Doctor> doctors, City city, State state) {
+       // this.id = id;
+        this.name = name;
+        this.contact = contact;
+        this.doctors = doctors;
+        this.city = city;
+        this.state = state;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

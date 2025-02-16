@@ -17,6 +17,14 @@ public class Doctor {
 
     private  String qualification;
 
+    public String getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
     @ManyToOne
     @JoinColumn(name = "hospital_id")
     private Hospital hospital;

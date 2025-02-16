@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Hospital Profile</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #f8f9fa;
+    }
+    .hospital-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #007bff;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .card {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .btn-view-profile {
+      background-color: #007bff;
+      border: none;
+    }
+    .btn-view-profile:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5">
+  <!-- Hospital Name -->
+  <h1 class="hospital-title" th:text="${hospital.name}"></h1>
+
+  <!-- Doctors Section -->
+  <h2 class="text-center mt-4 mb-4">👨‍⚕️ Doctors in this Hospital</h2>
+
+  <div class="row">
+    <!-- Loop through the list of doctors -->
+    <div th:each="doctor : ${doctorList}" class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow-lg p-3 rounded">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold" th:text="${doctor.name}"></h5>
+          <p class="card-text"><strong>🎓 Qualification:</strong> <span th:text="${doctor.qualification}"></span></p>
+          <p class="card-text"><strong>🏥 Speciality:</strong> <span th:text="${doctor.specialityName}"></span></p>
+          <button class="btn btn-view-profile">🔍 View Profile</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS (Optional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

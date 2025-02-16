@@ -55,26 +55,28 @@
 
 <div class="container">
   <h2>Add Hospital/Practice</h2>
-  <form action="/save-hospital" method="post">
+  <form action="/savePractise" method="post">
     <label for="name">Hospital/Practice Name:</label>
     <input type="text" id="name" name="name" required>
 
-    <label for="description">Description:</label>
-    <textarea id="description" name="description"></textarea>
 
-    <!-- State Dropdown -->
+
+
+
     <label for="state">State:</label>
     <select id="state" name="stateId" required>
       <option value="">Select State</option>
-      <th:block th:each="state : ${states}">
+      <th:block th:each="state : ${States}">
         <option th:value="${state.id}" th:text="${state.name}"></option>
       </th:block>
     </select>
 
-    <!-- City Dropdown -->
     <label for="city">City:</label>
     <select id="city" name="cityId" required>
       <option value="">Select City</option>
+      <th:block th:each="city : ${Cities}">
+        <option th:value="${city.id}" th:text="${city.name}"></option>
+      </th:block>
     </select>
 
     <button type="submit">Save Hospital</button>
@@ -82,24 +84,7 @@
 </div>
 
 <script>
-  $(document).ready(function() {
-      $("#state").change(function() {
-          var stateId = $(this).val();
-          $("#city").empty().append('<option value="">Select City</option>');
 
-          if (stateId) {
-              $.ajax({
-                  url: "/get-cities/" + stateId,
-                  type: "GET",
-                  success: function(data) {
-                      $.each(data, function(index, city) {
-                          $("#city").append('<option value="' + city.id + '">' + city.name + '</option>');
-                      });
-                  }
-              });
-          }
-      });
-  });
 </script>
 
 </body>
