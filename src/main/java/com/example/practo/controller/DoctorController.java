@@ -64,17 +64,7 @@ public class DoctorController {
         return "success";
     }
 
-    @GetMapping("/hospital/hospitalProfile/{id}")
-    public String viewPractiseProfile(@PathVariable String id, Model model) {
-        Optional<HospitalIndex> hospital = hospitalSearchRepository.findById(id);
 
-        if (hospital.isPresent()) {
-            model.addAttribute("hospital", hospital.get());
-            return "practiseProfile"; // Render the Thymeleaf template
-        } else {
-            return "error"; // Show an error page if doctor is not found
-        }
-    }
 }
 
 

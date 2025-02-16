@@ -1,65 +1,61 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Doctor Profile</title>
+  <title>Hospital Profile</title>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
   <style>
-    .profile-container {
-      width: 60%;
-      margin: auto;
+    body {
+      background-color: #f8f9fa;
+    }
+    .hospital-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #007bff;
       text-align: center;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      background-color: #fff;
+      margin-top: 20px;
     }
-
-    .profile-img {
-      width: 150px;
-      height: 150px;
-      border-radius: 50%;
-      margin-bottom: 10px;
+    .card {
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
     }
-
-    .appointment-btn {
-      display: block;
-      width: 80%;
-      margin: 10px auto;
-      padding: 10px;
-      color: white;
-      text-align: center;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 16px;
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     }
-
-    .instant-consultation {
-      background-color: #28a745;
+    .btn-view-profile {
+      background-color: #007bff;
+      border: none;
     }
-
-    .instant-consultation:hover {
-      background-color: #218838;
-    }
-
-    .in-clinic-appointment {
-      background-color: #dc3545;
-    }
-
-    .in-clinic-appointment:hover {
-      background-color: #c82333;
+    .btn-view-profile:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
 
-<div class="profile-container">
-  <img th:src="@{/images/doctor_img1.jpg}" alt="Doctor Image" class="profile-img">
-  <h2 th:text="${hospital.name}"></h2>
+<div class="container mt-5">
+  <!-- Hospital Name -->
+  <h1 class="hospital-title" th:text="${hospital.name}"></h1>
 
+  <!-- Doctors Section -->
+  <h2 class="text-center mt-4 mb-4">👨‍⚕️ Doctors in this Hospital</h2>
 
-
-
-  <a th:href="@{/bookAppointMent/{id}(id=${hospital.id})}" class="appointment-btn in-clinic-appointment">Book In-Clinic Appointment</a>
+  <div class="row">
+    <!-- Loop through the list of doctors -->
+    <div th:each="doctor : ${doctorList}" class="col-lg-4 col-md-6 mb-4">
+      <div class="card shadow-lg p-3 rounded">
+        <div class="card-body text-center">
+          <h5 class="card-title fw-bold" th:text="${doctor.name}"></h5>
+          <p class="card-text"><strong>🎓 Qualification:</strong> <span th:text="${doctor.qualification}"></span></p>
+          <p class="card-text"><strong>🏥 Speciality:</strong> <span th:text="${doctor.specialityName}"></span></p>
+          <button class="btn btn-view-profile">🔍 View Profile</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
+<!-- Bootstrap JS (Optional) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -56,7 +56,9 @@ public class DataSyncService {
                         doctor.getName(),
                         doctor.getAbout(),
                         doctor.getSpeciality().getName(),
-                        doctor.getCity().getName()
+                        doctor.getCity().getName(),
+                        doctor.getHospital().getId().toString(),
+                        doctor.getQualification()
                 );
                 doctorSearchRepository.save(doctorIndex);
                 System.out.println(" Synced: " + doctor.getName());

@@ -3,6 +3,7 @@ package com.example.practo.indexes;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.Id;
+import java.util.List;
 
 @Document(indexName = "hospitals")
 public class HospitalIndex {
@@ -10,6 +11,9 @@ public class HospitalIndex {
     private String id;
     private String name;
     private String cityName;
+    private List<DoctorIndex> doctorIndex;
+
+
 
     public HospitalIndex(){};
     public HospitalIndex(String id, String name, String cityName) {

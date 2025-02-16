@@ -14,6 +14,21 @@ public class DoctorIndex {
     private String about;
     private String specialityName;
     private String cityName;
+    private  String hospitalId;
+
+    public String getQualification() {
+        return qualification;
+    }
+
+    public void setQualification(String qualification) {
+        this.qualification = qualification;
+    }
+
+    private String qualification;
+
+
+
+
 
     public  DoctorIndex(){}
 
@@ -58,14 +73,22 @@ public class DoctorIndex {
     public void setCityName(String cityName) {
         this.cityName = cityName;
     }
+    public String getHospitalId() {
+        return hospitalId;
+    }
 
-    public DoctorIndex(String id, String name, String about, String specialityName, String cityName) {
+    public void setHospitalId(String hospitalId) {
+        this.hospitalId = hospitalId;
+    }
+
+    public DoctorIndex(String id, String name, String about, String specialityName, String cityName,String hospitalId,String qualification) {
         this.name = name;
         this.about = about;
         this.id = id;
-        //this.about = about;
+        this.hospitalId = hospitalId;
         this.specialityName = specialityName;
         this.cityName = cityName;
+        this.qualification = qualification;
 
     }
 }
