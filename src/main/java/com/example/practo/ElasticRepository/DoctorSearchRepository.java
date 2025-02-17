@@ -9,6 +9,7 @@ public interface DoctorSearchRepository extends ElasticsearchRepository<DoctorIn
 
     List<DoctorIndex> findByNameContainingOrSpecialityNameContaining(String name, String speciality);
     List<DoctorIndex> findByHospitalId(String hospitalId);
+    List<DoctorIndex> findDoctorsByCityName(String name);
 
 }
 

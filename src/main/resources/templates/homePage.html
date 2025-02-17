@@ -7,15 +7,59 @@
   <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f0f8ff;
+        background: url('/images/background.jpeg') no-repeat center center fixed;
+        background-size: cover;
         text-align: center;
-        margin: 50px;
+        margin: 0;
+        padding: 0;
     }
+
+    /* Navbar styles */
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgba(44, 62, 80, 0.8);
+        padding: 10px 20px;
+    }
+    .navbar img {
+        height: 50px;
+    }
+    .navbar .nav-links {
+        display: flex;
+        align-items: center;
+    }
+    .navbar .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+        padding: 8px 12px;
+        transition: 0.3s;
+    }
+    .navbar .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+    }
+    .login-signup {
+        background-color: #3498db;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+    .login-signup:hover {
+        background-color: #2980b9;
+    }
+
+    /* Container styling */
     .container {
         max-width: 600px;
-        margin: auto;
+        margin: 350px auto;
         padding: 20px;
-        background: white;
+        background: rgba(255, 255, 255, 0.9);
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
     }
@@ -26,36 +70,64 @@
         color: #555;
         font-size: 18px;
     }
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        margin: 10px;
+
+    /* Search box */
+    .search-box {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .search-box input {
+        width: 70%;
+        padding: 12px;
         font-size: 16px;
-        text-decoration: none;
+        border: 1px solid #ccc;
+        border-radius: 5px 0 0 5px;
+        outline: none;
+    }
+    .search-box button {
+        padding: 12px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: #3498db;
         color: white;
-        border-radius: 5px;
+        border-radius: 0 5px 5px 0;
+        cursor: pointer;
         transition: 0.3s;
     }
-    .login {
-        background-color: #3498db;
+    .search-box button:hover {
+        background-color: #2980b9;
     }
-    .signup {
-        background-color: #2ecc71;
-    }
-    .btn:hover {
-        opacity: 0.8;
-    }
+
   </style>
 </head>
 <body>
-<th:block th:insert="~{fragments/header}"></th:block>
 
+<!-- Navbar -->
+<div class="navbar">
+  <a th:href="@{/}">
+    <img th:src="@{/images/practo_logo.jpg}" alt="Logo">
+  </a>
+  <div class="nav-links">
+    <a th:href="@{/corporates}">For Corporates</a>
+    <a th:href="@{/providers}">For Providers</a>
+    <a th:href="@{/login}" class="login-signup">Login/Signup</a>
+  </div>
+</div>
+
+<!-- Main Content -->
 <div class="container">
-  <h1>Welcome to Practo</h1>
-  <p>Your health, our priority. Access top-quality medical care, book appointments, and connect with the best doctors.</p>
+  <h1>Find the Best Doctors</h1>
+  <p>Consult them anytime, anywhere – on the go!</p>
 
-  <a th:href="@{/login}" class="btn login">Login</a>
-  <a th:href="@{/signup}" class="btn signup">Sign Up</a>
+  <!-- Search Box -->
+  <div class="search-box">
+    <form th:action="@{/search}" method="get" style="display: flex; width: 100%;">
+      <input type="text" name="keyword" placeholder="Search for doctors, hospitals, or specialties" required>
+      <button type="submit">Search</button>
+    </form>
+  </div>
 </div>
 
 </body>

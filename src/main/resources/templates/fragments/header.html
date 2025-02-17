@@ -1,24 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
+  <title>Header</title>
   <style>
-    .header {
+    /* Navbar styles */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
-        background-color: #f8f9fa;
-        text-align: center;
-        padding: 10px 0;
+        height: 50px; /* Keeps it small */
+        background-color: #333; /* Optional background */
+        display: flex;
+        align-items: center;
+        padding: 5px 20px;
     }
-    .header img {
-        max-width: 200px; /* Adjust size as needed */
-        height: auto;
+
+    .navbar img {
+        height: 30px; /* Small logo */
+        width: auto;
     }
   </style>
 </head>
 <body>
 
-
-<div class="header">
-  <img th:src="@{/images/practo_logo.jpg}" alt="Header Logo">
+<!-- Navbar with small logo -->
+<div class="navbar">
+  <a th:href="@{/}">
+    <img th:src="@{/images/practo_logo.jpg}" alt="Website Logo">
+  </a>
 </div>
+
 </body>
 </html>

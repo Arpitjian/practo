@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+
   <title>Book an Appointment</title>
   <style>
     .appointment-container {
@@ -39,20 +40,60 @@
     .submit-btn:hover {
         background-color: #0056b3;
     }
+     .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #2c3e50;
+        padding: 10px 20px;
+    }
+    .navbar img {
+        height: 50px;
+    }
+    .navbar .nav-links {
+        display: flex;
+        align-items: center;
+    }
+    .navbar .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+        padding: 8px 12px;
+        transition: 0.3s;
+    }
+    .navbar .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+    }
+
   </style>
 </head>
-<body>
+<div class="navbar">
+  <a th:href="@{/}">
+    <img th:src="@{/images/practo_logo.jpg}" alt="Logo">
+  </a>
+
+</div>
+
 <div class="appointment-container">
   <h2>Book an Appointment</h2>
-  <form th:action="@{/saveAppointment}" method="get">
+  <form th:action="@{/saveAppointment/{id}(id=${doctor.id})}" method="post">
 
     <div class="form-group">
       <label for="endTime">Time:</label>
-      <input type="datetime-local" id="endTime" name="endTime" required>
+      <input type="datetime-local" id="endTime" name="time" required>
     </div>
 
     <button type="submit" class="submit-btn">Book Appointment</button>
   </form>
 </div>
+<!-- Add an event listener or log the value before submitting the form -->
+<script>
+  document.querySelector('form').addEventListener('submit', function (event) {
+    const datetimeValue = document.getElementById('endTime').value;
+    console.log(datetimeValue);  // Check the format being sent to the server
+  });
+</script>
 </body>
 </html>
