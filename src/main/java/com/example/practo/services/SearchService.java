@@ -35,9 +35,17 @@ public class SearchService {
 
         // Search doctors by name or speciality
         List<DoctorIndex> doctors = doctorSearchRepository.findByNameContainingOrSpecialityNameContaining(keyword, keyword);
+        List<DoctorIndex> doctorCity = doctorSearchRepository.findDoctorsByCityName(keyword);
+
+        // Combine doctors and doctorCity results
+        doctors.addAll(doctorCity);  // Add city-specific doctors to the list of doctors
 
         // Search hospitals by name
-        List<HospitalIndex> hospitals = hospitalSearchRepository.findByNameContainingOrNameContaining(keyword,keyword);
+        List<HospitalIndex> hospitals = hospitalSearchRepository.findByNameContainingOrNameContaining(keyword, keyword);
+        List<HospitalIndex> hosp1 = hospitalSearchRepository.findHospitalByCityName(keyword);
+
+        // Combine hospitals and hosp1 results
+        hospitals.addAll(hosp1);  // Add city-specific hospitals to the list of hospitals
 
         // Search cities by name
         List<CityIndex> cities = citySearchRepository.findByNameContaining(keyword);
@@ -53,4 +61,7 @@ public class SearchService {
 
         return results;
     }
+
 }
+
+

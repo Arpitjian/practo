@@ -66,8 +66,10 @@ public class DataSyncService {
                 System.err.println(" Error syncing doctor: " + doctor.getName() + " -> " + e.getMessage());
             }
         });
+        syncCitiesToElastic();
+        syncHospitalsToElastic();
     }
-    @PostConstruct
+   // @PostConstruct
     public void syncHospitalsToElastic() {
         hospitalRepository.findAll().forEach(hospital -> {
             try {
@@ -88,7 +90,7 @@ public class DataSyncService {
         });
     }
 
-    @PostConstruct
+    //@PostConstruct
     public void syncCitiesToElastic() {
         List<City> cities = cityRepository.findAll();
 

@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface HospitalSearchRepository extends ElasticsearchRepository<HospitalIndex, String> {
     List<HospitalIndex> findByNameContainingOrNameContaining(String name, String city);
+    List<HospitalIndex>findHospitalByCityName(String Name);
 }

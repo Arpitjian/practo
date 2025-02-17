@@ -3,41 +3,64 @@
 <head>
   <title>Doctor Profile</title>
   <style>
-    .profile-container {
-      width: 60%;
-      margin: auto;
-      text-align: center;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7f6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 80%;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 30px;
+      border-radius: 15px;
       background-color: #fff;
+      box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .profile-img {
-      width: 150px;
-      height: 150px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
+      object-fit: cover;
+      margin-right: 30px;
+    }
+
+    .profile-details {
+      flex-grow: 1;
+      text-align: left;
+    }
+
+    .profile-details h2 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .profile-details p {
+      font-size: 18px;
       margin-bottom: 10px;
+      color: #555;
     }
 
     .appointment-btn {
-      display: block;
-      width: 80%;
-      margin: 10px auto;
-      padding: 10px;
-      color: white;
+      display: inline-block;
+      width: 220px;
+      padding: 12px 0;
+      margin-top: 20px;
       text-align: center;
-      border-radius: 5px;
-      text-decoration: none;
       font-size: 16px;
-    }
-
-    .instant-consultation {
-      background-color: #28a745;
-    }
-
-    .instant-consultation:hover {
-      background-color: #218838;
+      text-decoration: none;
+      border-radius: 8px;
+      color: white;
     }
 
     .in-clinic-appointment {
@@ -47,20 +70,178 @@
     .in-clinic-appointment:hover {
       background-color: #c82333;
     }
+
+    /* Reviews Section */
+    .reviews-section, .articles-section, .write-review-section {
+      margin-top: 40px;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #fff;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .reviews-section h3, .articles-section h3, .write-review-section h3 {
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .review {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .review:last-child {
+      border-bottom: none;
+    }
+
+    .review p {
+      font-size: 16px;
+      color: #555;
+      margin: 5px 0;
+    }
+
+    .review .reviewer {
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    /* Write Review Form */
+    .write-review-section textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .write-review-section button {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .write-review-section button:hover {
+      background-color: #218838;
+    }
+
+    /* Articles Section */
+    .article {
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .article:last-child {
+      border-bottom: none;
+    }
+
+    .article h4 {
+      color: #007bff;
+      margin: 5px 0;
+    }
+
+    .article p {
+      font-size: 16px;
+      color: #555;
+    }
+    .navbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #2c3e50;
+        padding: 10px 20px;
+    }
+    .navbar img {
+        height: 50px;
+    }
+    .navbar .nav-links {
+        display: flex;
+        align-items: center;
+    }
+    .navbar .nav-links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 16px;
+        padding: 8px 12px;
+        transition: 0.3s;
+    }
+    .navbar .nav-links a:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+    }
+
   </style>
 </head>
 <body>
+<div class="navbar">
+  <a th:href="@{/}">
+    <img th:src="@{/images/practo_logo.jpg}" alt="Logo">
+  </a>
 
-<div class="profile-container">
-  <img th:src="@{/images/doctor_img1.jpg}" alt="Doctor Image" class="profile-img">
-  <h2 th:text="${doctor.name}"></h2>
-  <p><strong>Speciality:</strong> <span th:text="${doctor.specialityName}"></span></p>
-  <p><strong>City:</strong> <span th:text="${doctor.cityName}"></span></p>
-  <p><strong>About:</strong> <span th:text="${doctor.about}"></span></p>
+</div>
+<div class="container">
+  <!-- Navbar -->
 
+  <!-- Doctor Profile -->
+  <div class="profile-container">
+    <img th:src="@{/images/doctor_img1.jpg}" alt="Doctor Image" class="profile-img">
+    <div class="profile-details">
+      <h2 th:text="${doctor.name}"></h2>
+      <p><strong>Speciality:</strong> <span th:text="${doctor.specialityName}"></span></p>
+      <p><strong>City:</strong> <span th:text="${doctor.cityName}"></span></p>
+      <p><strong>About:</strong> <span th:text="${doctor.about}"></span></p>
+      <a th:href="@{/bookAppointment/{id}(id=${doctor.id})}" class="appointment-btn in-clinic-appointment">Book in
+      -Clinic Appointment</a>
+    </div>
+  </div>
 
+  <!-- Reviews Section -->
+  <div class="reviews-section">
+    <h3>Patient Reviews</h3>
+    <div class="review">
+      <p>"Amazing doctor! Helped me recover quickly. Highly recommend."</p>
+      <p class="reviewer">- John Doe</p>
+    </div>
+    <div class="review">
+      <p>"Very professional and kind. Explained everything in detail."</p>
+      <p class="reviewer">- Jane Smith</p>
+    </div>
+    <div class="review">
+      <p>"Best doctor I've visited. Great experience overall."</p>
+      <p class="reviewer">- Mike Johnson</p>
+    </div>
+  </div>
 
-  <a th:href="@{/bookAppointMent/{id}(id=${doctor.id})}" class="appointment-btn in-clinic-appointment">Book In-Clinic Appointment</a>
+  <!-- Write a Review -->
+  <div class="write-review-section">
+    <h3>Write a Review</h3>
+    <form th:action="@{/addReview}" method="post">
+      <input type="hidden" name="doctorId" th:value="${doctor.id}">
+      <textarea name="reviewText" placeholder="Write your review here..." required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+  </div>
+
+  <!-- Articles Section -->
+  <div class="articles-section">
+    <h3>Articles by Dr. <span th:text="${doctor.name}"></span></h3>
+    <div class="article">
+      <h4>5 Tips for a Healthy Heart</h4>
+      <p>Maintaining a healthy heart is crucial for overall well-being. Here are five simple steps to keep your heart strong...</p>
+    </div>
+    <div class="article">
+      <h4>The Importance of Regular Check-Ups</h4>
+      <p>Regular health check-ups can help detect potential health issues before they become serious...</p>
+    </div>
+  </div>
+
 </div>
 
 </body>
