@@ -5,17 +5,20 @@
   <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
+        background-image: url('images/background.jpeg'); /* Background image */
+        background-size: cover;
+        background-position: center;
+        color: white;
         text-align: center;
         padding: 50px;
     }
     .container {
         max-width: 600px;
         margin: auto;
-        background: white;
+        background: rgba(255, 255, 255, 0.8); /* Light transparent background */
         padding: 30px;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     }
     h1 {
         color: #2c3e50;
@@ -29,53 +32,33 @@
     }
     input[type="text"] {
         width: 80%;
-        padding: 10px;
-        border: 1px solid #ccc;
+        padding: 12px;
+        border: 2px solid #3498db;
         border-radius: 5px;
-        font-size: 16px;
+        font-size: 18px;
+        outline: none;
+        transition: border-color 0.3s ease;
+        background-color: #fff;
+    }
+    input[type="text"]:focus {
+        border-color: #2980b9;
     }
     button {
-        padding: 10px 15px;
+        padding: 12px 18px;
         border: none;
         background-color: #3498db;
         color: white;
         border-radius: 5px;
         font-size: 16px;
         cursor: pointer;
+        transition: background-color 0.3s ease;
     }
     button:hover {
         background-color: #2980b9;
     }
 
-    /* Image Container */
-    .image-container {
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-        padding: 20px;
-        background-color: #f4f4f4;
-    }
-
-    .image-box {
-        text-align: center;
-    }
-
-    .image-box img {
-        width: 200px;  /* Fixed width */
-        height: 150px; /* Fixed height */
-        object-fit: cover; /* Ensures the image fills the box without distortion */
-        border-radius: 10px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-        display: block;
-        margin-bottom: 10px;
-    }
-
-    .caption {
-        font-size: 16px;
-        color: #333;
-        font-weight: bold;
-    }
-     .navbar {
+    /* Navbar Styles */
+    .navbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -116,21 +99,6 @@
       <input type="text" name="keyword" placeholder="Search for doctors, hospitals, or specialties">
       <button type="submit">Search</button>
     </form>
-  </div>
-
-  <div class="image-container">
-    <div class="image-box">
-      <img th:src="@{/images/instant_video.png}" alt="Instant Video">
-      <div class="caption">Connect within 60 secs</div>
-    </div>
-    <div class="image-box">
-      <img th:src="@{/images/find_doc_n.png}" alt="Find Doctor">
-      <div class="caption">Confirmed Appointments</div>
-    </div>
-    <div class="image-box">
-      <img th:src="@{/images/surgery.png}" alt="Surgery">
-      <div class="caption">Safe and secure surgery center</div>
-    </div>
   </div>
 
 </div>

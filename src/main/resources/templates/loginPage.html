@@ -46,7 +46,12 @@
     .signup-message a:hover {
         text-decoration: underline;
     }
-     .navbar {
+    .error-message {
+        color: red;
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+    .navbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -80,7 +85,6 @@
   <a th:href="@{/}">
     <img th:src="@{/images/practo_logo.jpg}" alt="Logo">
   </a>
-
 </div>
 
 <h1>Login</h1>
@@ -95,6 +99,10 @@
     </select>
     <button type="submit" class="login-button">Login</button>
   </form>
+
+  <!-- Display error message if present -->
+  <p th:if="${error}" class="error-message" th:text="${error}"></p>
+
   <p class="signup-message">Not a user? <a th:href="@{/signup}">Sign up here</a></p>
 </div>
 </body>

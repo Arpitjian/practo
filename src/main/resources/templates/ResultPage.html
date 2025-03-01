@@ -21,53 +21,46 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
     }
-    .card-container {
+    .list-container {
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column;
         gap: 20px;
     }
-    .card {
+    .list-item {
         background: white;
-        border-radius: 10px;
+        padding: 15px;
+        border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 280px;
-        padding: 20px;
-        text-align: center;
-        transition: transform 0.3s ease-in-out;
+        display: flex;
+        align-items: center;
+        gap: 20px;
     }
-    .card:hover {
-        transform: scale(1.05);
-    }
-    .card img {
-        width: 100px;
-        height: 100px;
+    .list-item img {
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
         object-fit: cover;
-        margin-bottom: 10px;
     }
-    .doctor-name, .hospital-name {
+    .list-item .name {
         font-size: 18px;
         font-weight: bold;
-        margin-bottom: 5px;
     }
-    .doctor-speciality, .doctor-city, .hospital-city {
+    .list-item .city, .list-item .speciality {
         font-size: 14px;
         color: #666;
     }
     .profile-button {
-        display: inline-block;
-        margin-top: 10px;
         padding: 8px 12px;
         background: #007bff;
         color: white;
         text-decoration: none;
         border-radius: 5px;
+        margin-left: auto;
     }
     .profile-button:hover {
         background: #0056b3;
     }
- .navbar {
+    .navbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -107,23 +100,27 @@
 <div class="container">
   <h2>Search Results for "<span th:text="${keyword}"></span>"</h2>
 
-  <h2 style="text-align: center;">Doctor Search Results</h2>
-  <div class="card-container">
-    <div class="card" th:each="doctor : ${doctors}">
+  <h2>Doctor Search Results</h2>
+  <div class="list-container">
+    <div class="list-item" th:each="doctor : ${doctors}">
       <img th:src="@{/images/doctor_img1.jpg}" alt="Doctor Image">
-      <div class="doctor-name" th:text="${doctor.name}"></div>
-      <div class="doctor-speciality" th:text="${doctor.specialityName}"></div>
-      <div class="doctor-city" th:text="${doctor.cityName}"></div>
+      <div>
+        <div class="name" th:text="${doctor.name}"></div>
+        <div class="speciality" th:text="${doctor.specialityName}"></div>
+        <div class="city" th:text="${doctor.cityName}"></div>
+      </div>
       <a th:href="@{/doctor/doctorProfile/{id}(id=${doctor.id})}" class="profile-button">View Profile</a>
     </div>
   </div>
 
-  <h2 style="text-align: center;">Hospital Search Results</h2>
-  <div class="card-container">
-    <div class="card" th:each="hospital : ${hospitals}">
+  <h2>Hospital Search Results</h2>
+  <div class="list-container">
+    <div class="list-item" th:each="hospital : ${hospitals}">
       <img th:src="@{/images/hospital.jpg}" alt="Hospital Image">
-      <div class="hospital-name" th:text="${hospital.name}"></div>
-      <div class="hospital-city" th:text="${hospital.cityName}"></div>
+      <div>
+        <div class="name" th:text="${hospital.name}"></div>
+        <div class="city" th:text="${hospital.cityName}"></div>
+      </div>
       <a th:href="@{/hospital/hospitalProfile/{id}(id=${hospital.id})}" class="profile-button">View Hospital Profile</a>
     </div>
   </div>

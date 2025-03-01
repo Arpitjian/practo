@@ -27,6 +27,6 @@ public class SearchController {
         model.addAttribute("cities", results.get("cities"));
         model.addAttribute("specialities", results.get("specialities"));
 
-        return "ResultPage"; // This will render search-results.html
+        return "ResultPage";
     }
 }

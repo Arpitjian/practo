@@ -68,14 +68,14 @@
 
 <div class="container mt-5">
 
-  <!-- Hospital Name -->
+
   <h1 class="hospital-title" th:text="${hospital.name}"></h1>
 
-  <!-- Doctors Section -->
+
   <h2 class="text-center mt-4 mb-4">👨‍⚕️ Doctors in this Hospital</h2>
 
   <div class="row">
-    <!-- Loop through the list of doctors -->
+
     <div th:each="doctor : ${doctorList}" class="col-lg-4 col-md-6 mb-4">
 
       <div class="card shadow-lg p-3 rounded">

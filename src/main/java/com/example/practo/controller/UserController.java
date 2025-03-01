@@ -42,7 +42,7 @@ public class UserController {
                                @RequestParam String role, Model model) {
         userService.registerUser(username, password, role);
         model.addAttribute("message", "Registration successful! Please login.");
-        return "homePage"; // Redirect to login page after registration
+        return "homePage";
     }
 
 
@@ -70,10 +70,10 @@ public class UserController {
             else{
                 return "userDashBoard";
             }
-             // Redirect to the dashboard if valid
+
         } else {
             model.addAttribute("error", "Invalid username or password!");
-            return "login"; // Reload login page with an error message
+            return "loginPage"; // Reload login page with an error message
         }
     }
     @GetMapping("/addDoctor")
@@ -114,7 +114,7 @@ public class UserController {
         doctor.setState(stateRepo.findById(stateId).orElse(null));
 
         doctorRepository.save(doctor);
-        return  "success";
+        return  "successDoctor";
     }
 
     @GetMapping("/addPractise")
@@ -138,20 +138,27 @@ public class UserController {
     }
     @PostMapping("/savePractise")
     public String saveDoctor(@RequestParam String name,
-
-
-
                              @RequestParam Long cityId,
                              @RequestParam Long stateId
                              ) {
         Hospital hospital = new Hospital();
         hospital.setName(name);
 
-        hospital.setCity(cityRepo.findById(cityId).orElse(null));
-        hospital.setState(stateRepo.findById(stateId).orElse(null));
+       // Long stateIdl = Long.parseLong(stateId);
+       // Long cityIdl = Long.parseLong(cityId);
+        City city = cityRepo.findById(cityId).orElse(null);
+        State state = stateRepo.findById(stateId).orElse(null);
 
-        hospitalRepository.save(hospital);
-        return  "success";
+        if (city != null && state != null) {
+            hospital.setCity(city);
+            hospital.setState(state);
+            hospitalRepository.save(hospital);
+            return "successPractise";
+        } else {
+            // Handle the case where city or state is not found, maybe return an error message
+            return "error";
+        }
+        //return  "success";
     }
 
     @GetMapping("/addSpeciality")

@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
   <title>Book an Appointment</title>
   <style>
     .appointment-container {
@@ -40,7 +39,12 @@
     .submit-btn:hover {
         background-color: #0056b3;
     }
-     .navbar {
+    .error {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    .navbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -66,19 +70,18 @@
         background-color: rgba(255, 255, 255, 0.2);
         border-radius: 5px;
     }
-
   </style>
 </head>
+<body>
 <div class="navbar">
   <a th:href="@{/}">
     <img th:src="@{/images/practo_logo.jpg}" alt="Logo">
   </a>
-
 </div>
 
 <div class="appointment-container">
   <h2>Book an Appointment</h2>
-  <form th:action="@{/saveAppointment/{id}(id=${doctor.id})}" method="post">
+  <form th:action="@{/saveAppointment/{id}(id=${doctor.id})}" method="post" id="appointmentForm">
 
     <div class="form-group">
       <label for="endTime">Time:</label>
@@ -86,14 +89,41 @@
     </div>
 
     <button type="submit" class="submit-btn">Book Appointment</button>
+    <div class="error" id="errorMessage"></div>
   </form>
 </div>
-<!-- Add an event listener or log the value before submitting the form -->
+
 <script>
-  document.querySelector('form').addEventListener('submit', function (event) {
-    const datetimeValue = document.getElementById('endTime').value;
-    console.log(datetimeValue);  // Check the format being sent to the server
+  // Function to get the current date and time in the required format for input (YYYY-MM-DDTHH:MM)
+  function getCurrentDateTime() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+
+    // Return the format in the form YYYY-MM-DDTHH:MM
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
+
+  // Update the min attribute when the document is loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    const currentDateTime = getCurrentDateTime();
+    document.getElementById('endTime').setAttribute('min', currentDateTime);
+  });
+
+  // Validate if the chosen time is in the future
+  document.getElementById('appointmentForm').addEventListener('submit', function (event) {
+    const selectedTime = document.getElementById('endTime').value;
+    const currentTime = getCurrentDateTime();
+
+    if (selectedTime < currentTime) {
+      event.preventDefault(); // Prevent form submission
+      document.getElementById('errorMessage').textContent = "The selected time must be in the future.";
+    }
   });
 </script>
+
 </body>
 </html>

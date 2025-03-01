@@ -187,9 +187,7 @@
 
 </div>
 <div class="container">
-  <!-- Navbar -->
 
-  <!-- Doctor Profile -->
   <div class="profile-container">
     <img th:src="@{/images/doctor_img1.jpg}" alt="Doctor Image" class="profile-img">
     <div class="profile-details">
@@ -202,7 +200,7 @@
     </div>
   </div>
 
-  <!-- Reviews Section -->
+
   <div class="reviews-section">
     <h3>Patient Reviews</h3>
     <div class="review">
@@ -219,17 +217,17 @@
     </div>
   </div>
 
-  <!-- Write a Review -->
-  <div class="write-review-section">
-    <h3>Write a Review</h3>
-    <form th:action="@{/addReview}" method="post">
-      <input type="hidden" name="doctorId" th:value="${doctor.id}">
-      <textarea name="reviewText" placeholder="Write your review here..." required></textarea>
-      <button type="submit">Submit Review</button>
-    </form>
-  </div>
 
-  <!-- Articles Section -->
+<!--  <div class="write-review-section">-->
+<!--    <h3>Write a Review</h3>-->
+<!--    <form th:action="@{/addReview}" method="get">-->
+<!--      <input type="hidden" name="doctorId" th:value="${doctor.id}">-->
+<!--      <textarea name="reviewText" placeholder="Write your review here..." required></textarea>-->
+<!--      <button type="submit">Submit Review</button>-->
+<!--    </form>-->
+<!--  </div>-->
+
+
   <div class="articles-section">
     <h3>Articles by Dr. <span th:text="${doctor.name}"></span></h3>
     <div class="article">

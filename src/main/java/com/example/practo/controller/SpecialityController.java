@@ -11,7 +11,7 @@ import java.util.List;
 
 @Controller
 public class SpecialityController {
-    //@Autowired Speciality speciality;
+
     @Autowired
     private SpecialityRepo specialityRepo;
 

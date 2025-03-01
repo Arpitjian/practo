@@ -27,7 +27,5 @@ public class State {
     public void setName(String name) {
         this.name = name;
     }
-//
-//    @OneToMany(mappedBy = "state", cascade = CascadeType.ALL)
-//    private List<City> cities;
+
 }

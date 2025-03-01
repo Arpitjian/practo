@@ -1,6 +1,6 @@
 package com.example.practo.entity;
 
-//import lombok.Data;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

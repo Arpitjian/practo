@@ -14,4 +14,8 @@ public class MainController {
     public String admin(){
         return  "adminDashBoard";
     }
+    @GetMapping("/addReview")
+    public String review(){
+        return  "successreview";
+    }
 }

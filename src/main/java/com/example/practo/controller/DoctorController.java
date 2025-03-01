@@ -45,29 +45,29 @@ public class DoctorController {
     private HospitalSearchRepository hospitalSearchRepository;
 
     @Autowired
-    private  AppointmentRepo appointmentRepo;
+    private AppointmentRepo appointmentRepo;
 
     @Autowired
     private HospitalRepository hospitalRepository;
 
-        @GetMapping("/doctor/doctorProfile/{id}")
-        public String viewDoctorProfile(@PathVariable String id, Model model) {
+    @GetMapping("/doctor/doctorProfile/{id}")
+    public String viewDoctorProfile(@PathVariable String id, Model model) {
         Optional<DoctorIndex> doctor = doctorSearchRepository.findById(id);
 
         if (doctor.isPresent()) {
             model.addAttribute("doctor", doctor.get());
-            return "DoctorProfile"; // Render the Thymeleaf template
+            return "DoctorProfile";
         } else {
-            return "error"; // Show an error page if doctor is not found
+            return "error";
         }
     }
 
     @GetMapping("/bookAppointment/{id}")
     public String bookAppointment(@PathVariable String id, Model model) {
-            Long idl = Long.parseLong(id);
+        Long idl = Long.parseLong(id);
         Doctor doctor = doctorRepository.findById(idl).orElse(null);
         if (doctor == null) {
-            // Handle the case when doctor is not found
+
             return "doctorNotFound";
         }
         model.addAttribute("doctor", doctor);
@@ -83,16 +83,16 @@ public class DoctorController {
             return "Doctor not found!";
         }
 
-        System.out.println("Appointment time: "+time);
+        System.out.println("Appointment time: " + time);
 
         try {
-            // Convert time string to LocalDateTime
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
 
-            // Convert the time string to LocalDateTime
+
             LocalDateTime appointmentTime = LocalDateTime.parse(time, formatter);
 
-            // Create and save the appointment with default status PENDING
+
             Appointments appointment = new Appointments(doctor, appointmentTime, Appointments.Status.PENDING);
             appointmentRepo.save(appointment);
 
@@ -102,7 +102,6 @@ public class DoctorController {
             return "success";
         }
     }
-
 
 
 }

@@ -24,14 +24,14 @@ public class HospitalController {
     DoctorSearchRepository doctorSearchRepository;
     @GetMapping("/hospital/hospitalProfile/{id}")
     public String viewHospitalProfile(@PathVariable String id, Model model) {
-        // Fetch hospital details
+
         Optional<HospitalIndex> hospital = hospitalSearchRepository.findById(id);
 
         Long hospitalId;
         try {
             hospitalId = Long.parseLong(id);
         } catch (NumberFormatException e) {
-            return "error"; // Handle invalid IDs gracefully
+            return "error";
         }
 
 

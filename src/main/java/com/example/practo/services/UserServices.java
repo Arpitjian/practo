@@ -20,10 +20,10 @@ public class UserServices {
         System.out.println("checking..");
         User user = userRepository.findByUserName(username);
         if (user == null) {
-            return false; // User does not exist
+            return false;
         }
         boolean flag =  passwordEncoder.matches(rawPassword, user.getPassword());
-        //System.out.println("");
+
         if(flag){
             System.out.println("Yes user is valid");
         }
